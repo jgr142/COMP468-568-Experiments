@@ -22,8 +22,7 @@ This mini-lab guides senior undergraduates through implementing a dense General 
 
 ### Tasks
 1. **Matrix math refresher**
-   - Derive the FLOP count `2*M*N*K` and memory footprint.
-   - Answer the pre-lab questions in your lab notebook.
+   - Derive the FLOP count `2*M*N*K` and memory footprint. (No need to submit)
 2. **Baseline host implementation (`src/main.cu`)**
    - Fill in the TODO blocks that allocate device buffers, copy data, launch kernels, and gather timing.
 3. **CUDA kernels (`src/gemm_kernel.cuh`)**
