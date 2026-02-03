@@ -56,6 +56,7 @@ This mini-lab guides senior undergraduates through implementing a dense General 
 | 5   | Finalize report & cleanup repo |
 
 ### Make Targets
+Change the compute capacity in the Makefile to match your GPU version. (`sm_80` for A100, `sm_70` for V100)
 ```bash
 make        # build bin/dgemm
 make clean  # remove build artifacts
