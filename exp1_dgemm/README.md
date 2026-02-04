@@ -32,6 +32,7 @@ This mini-lab guides senior undergraduates through implementing a dense General 
 4. **Performance study**
    - Use `scripts/measure.sh` as a template to sweep problem sizes.
    - Compare against cuBLAS (already linked). Report GFLOP/s gap and hypothesize causes.
+   - Compare the performace across different tiling sizes (you may try 16, 32, 64, etc.).
 5. **Report**
    - Include methodology, plots, speedups, and an analysis of memory vs compute limits.
 
@@ -42,7 +43,7 @@ This mini-lab guides senior undergraduates through implementing a dense General 
 
 ### Rubric (20 pts)
 - Correctness (6) – numerical accuracy vs cuBLAS reference implementation.
-- Performance (6) – meets ≥70% of cuBLAS GFLOP/s for target sizes.
+- Performance (6) – meets >30% of cuBLAS GFLOP/s for target sizes. You should achieve clear acceleration using tiled implementation compared to the naive implementation. (Aim for your best, you are able to achieve up to 70% of the cuBLAS FLOPs but it is not required)
 - Analysis (4) – thoughtful discussion of bottlenecks.
 - Presentation (4) – report clarity and code readability.
 
