@@ -221,7 +221,8 @@ int main(int argc, char **argv) {
   }
 
   // copy final activations back to h_output.
-  cudaMemcpy(d_workspace_a, h_output, h_output, cudaMemcpyHostToDevice);
+  cudaMemCpy(h_output.data(), &d_workspace_a, bytes_output,
+             cudaMemCpyDeviceToHost);
 
   if (opt.verify) {
     mlp_cpu_reference(opt.layers, batch, h_weights, h_biases, weight_offsets,
