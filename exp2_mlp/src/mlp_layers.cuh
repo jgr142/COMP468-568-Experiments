@@ -57,7 +57,7 @@ __global__ void relu_kernel(float *__restrict__ activations, size_t elements) {
   if (idx >= elements)
     return;
 
-  activations[idx] = std::max(0, activations[idx]);
+  activations[idx] = std::max(0.0f, activations[idx]);
 }
 
 __global__ void gelu_kernel(float *__restrict__ activations, size_t elements) {
