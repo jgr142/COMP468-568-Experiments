@@ -172,7 +172,8 @@ int main(int argc, char **argv) {
 
   // Copy Host data
   check_cuda(
-      cudaMemCpy(d_input, h_input.data(), bytes_input, cudaMemCpyHostToDevice));
+      cudaMemCpy(d_input, h_input.data(), bytes_input, cudaMemCpyHostToDevice),
+      "Copy input from host to device");
 
   // Create events and streams
   cudaEvent_t start, stop;
@@ -221,8 +222,9 @@ int main(int argc, char **argv) {
   }
 
   // copy final activations back to h_output.
-  cudaMemCpy(h_output.data(), &d_workspace_a, bytes_output,
-             cudaMemCpyDeviceToHost);
+  check_cuda(cudaMemCpy(h_output.data(), &d_workspace_a, bytes_output,
+                        cudaMemCpyDeviceToHost),
+             "Copy output from device to host");
 
   if (opt.verify) {
     mlp_cpu_reference(opt.layers, batch, h_weights, h_biases, weight_offsets,
