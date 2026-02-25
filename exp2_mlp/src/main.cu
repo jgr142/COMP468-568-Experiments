@@ -1,6 +1,7 @@
 #include <cublas_v2.h>
 #include <cuda_runtime.h>
 
+#include <algorithm>
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -88,6 +89,9 @@ void seed_tensor(std::vector<float> &data, float scale) {
   }
 }
 
+__inline__ void cpu_gemm_layer(std::vector<float> &input, float *weights,
+                               std::vector<float> &output, ) {}
+
 void mlp_cpu_reference(const std::vector<int> &layers, int batch,
                        const std::vector<float> &weights,
                        const std::vector<float> &biases,
@@ -99,6 +103,20 @@ void mlp_cpu_reference(const std::vector<int> &layers, int batch,
   /* TODO(student): implement a simple CPU forward pass (GEMM + bias +
      activation per layer). Remember that weights are stored row-major with
      shape [out_dim, in_dim]. */
+
+  std::vector<float> curr = input;
+  std::vector<float> next(batch * out_dim);
+
+  for (int layer = 0; layer < num_layers; ++layer) {
+    LayerShape shape{batch, layers[layer], layers[layer + 1]};
+
+    const float *d_w = weights + weight_offsets[layer];
+    const float *d_b = biases + bias_offsets[layer];
+    run_gemm_layer(curr, d_w, next, shape, handle);
+    launch_bias_add(d_b, d_workspace_b, shape, stream);
+    launch_activation(opt.activation, d_workspace_b, shape, stream);
+    std::swap(d_workspace_a, d_workspace_b);
+  }
   (void)layers;
   (void)batch;
   (void)weights;
@@ -117,6 +135,8 @@ int main(int argc, char **argv) {
   const size_t input_elems = static_cast<size_t>(batch) * opt.layers.front();
   const size_t output_elems = static_cast<size_t>(batch) * opt.layers.back();
   const int num_layers = static_cast<int>(opt.layers.size()) - 1;
+  const int max_layer_width =
+      *std::max_element(opt.layers.begin(), opt.layers.end());
 
   // Calculate offsets
   std::vector<size_t> weight_offsets(num_layers, 0);
@@ -145,6 +165,8 @@ int main(int argc, char **argv) {
       static_cast<size_t>(weight_cursor) * sizeof(float);
   const size_t bytes_biases = static_cast<size_t>(bias_cursor) * sizeof(float);
   const size_t bytes_output = static_cast<size_t>(output_elems) * sizeof(float);
+  const size_t bytes_max_width =
+      static_cast<size_t>(max_layer_width) * sizeof(float);
 
   // Fill values with random values
   seed_tensor(h_input, 1.0f);
@@ -165,15 +187,26 @@ int main(int argc, char **argv) {
              "allocate weights array");
   check_cuda(cudaMalloc((void **)&d_biases, bytes_biases),
              "allocate biases array");
-  check_cuda(cudaMalloc((void **)&d_workspace_a, bytes_output * batch),
+  check_cuda(cudaMalloc((void **)&d_workspace_a, bytes_max_width * batch),
              "allocate first workspace array");
-  check_cuda(cudaMalloc((void **)&d_workspace_b, bytes_output * batch),
+  check_cuda(cudaMalloc((void **)&d_workspace_b, bytes_max_width * batch),
              "allocate second workspace array");
 
   // Copy Host data
   check_cuda(
       cudaMemcpy(d_input, h_input.data(), bytes_input, cudaMemcpyHostToDevice),
       "Copy input from host to device");
+  check_cuda(cudaMemcpy(d_weights, h_weights.data(), bytes_weights,
+                        cudaMemcpyHostToDevice),
+             "Copy weights from host to device");
+  check_cuda(cudaMemcpy(d_biases, h_biases.data(), bytes_biases,
+                        cudaMemcpyHostToDevice),
+             "Copy biases from host to device");
+
+  // Copy Input Data to Workspace
+  check_cuda(
+      cudaMemcpy(d_workspace_a, d_input, bytes_input, cudaMemcpyDeviceToDevice),
+      "Copy input from device to device");
 
   // Create events and streams
   cudaEvent_t start, stop;
@@ -222,7 +255,7 @@ int main(int argc, char **argv) {
   }
 
   // copy final activations back to h_output.
-  check_cuda(cudaMemcpy(h_output.data(), &d_workspace_a, bytes_output,
+  check_cuda(cudaMemcpy(h_output.data(), d_workspace_a, bytes_output,
                         cudaMemcpyDeviceToHost),
              "Copy output from device to host");
 
