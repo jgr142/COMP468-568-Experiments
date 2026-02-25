@@ -28,7 +28,7 @@ inline double mlp_gflops(const std::vector<int> &layers, int batch,
   return total_flops / (millis * 1e6);
 }
 
-inline float gelu(float x) {
+__device__ __forceinline__ float gelu(float x) {
   const float kAlpha = 0.797885f; // sqrt(2/pi)
   const float kBeta = 0.044715f;
 
