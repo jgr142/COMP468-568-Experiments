@@ -4,7 +4,6 @@
 #include <cublas_v2.h>
 #include <cuda_runtime.h>
 
-#include <algorithm>
 #include <cmath>
 #include <string>
 #include <vector>
@@ -57,7 +56,9 @@ __global__ void relu_kernel(float *__restrict__ activations, size_t elements) {
   if (idx >= elements)
     return;
 
-  activations[idx] = std::max(0.0f, activations[idx]);
+  float activation = activations[idx];
+  if (activation < 0)
+    activations[idx] = 0;
 }
 
 __global__ void gelu_kernel(float *__restrict__ activations, size_t elements) {
