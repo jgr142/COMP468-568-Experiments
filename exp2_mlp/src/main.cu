@@ -172,7 +172,7 @@ int main(int argc, char **argv) {
 
   // Copy Host data
   check_cuda(
-      cudaMemCpy(d_input, d_input.data(), bytes_input, cudaMemCpyHostToDevice));
+      cudaMemCpy(d_input, h_input.data(), bytes_input, cudaMemCpyHostToDevice));
 
   // Create events and streams
   cudaEvent_t start, stop;
