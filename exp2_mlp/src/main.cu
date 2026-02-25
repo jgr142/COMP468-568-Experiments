@@ -118,6 +118,7 @@ int main(int argc, char **argv) {
   const size_t output_elems = static_cast<size_t>(batch) * opt.layers.back();
   const int num_layers = static_cast<int>(opt.layers.size()) - 1;
 
+  // Calculate offsets
   std::vector<size_t> weight_offsets(num_layers, 0);
   std::vector<size_t> bias_offsets(num_layers, 0);
   size_t weight_cursor = 0;
@@ -164,11 +165,9 @@ int main(int argc, char **argv) {
              "allocate weights array");
   check_cuda(cudaMalloc((void **)&d_biases, bytes_biases),
              "allocate biases array");
-  check_cuda(cudaMalloc((void **)&d_workspace_a,
-                        bytes), // FIXME: bytes is not a real value
+  check_cuda(cudaMalloc((void **)&d_workspace_a, bytes_output * batch),
              "allocate first workspace array");
-  check_cuda(cudaMalloc((void **)&d_workspace_b,
-                        bytes), // FIXME: bytes is not a real value
+  check_cuda(cudaMalloc((void **)&d_workspace_b, bytes_output * batch),
              "allocate second workspace array");
 
   // Copy Host data
@@ -192,10 +191,8 @@ int main(int argc, char **argv) {
     check_cuda(cudaEventRecord(start, stream), "record baseline start");
     for (int layer = 0; layer < num_layers; ++layer) {
       LayerShape shape{batch, opt.layers[layer], opt.layers[layer + 1]};
-      const float *d_w =
-          nullptr; // TODO(student): offset into d_weights based on layer
-      const float *d_b =
-          nullptr; // TODO(student): offset into d_biases based on layer
+      const float *d_w = d_weights + weight_offsets[layer];
+      const float *d_b = d_biases + bias_offsets[layer];
       run_gemm_layer(d_workspace_a, d_w, d_workspace_b, shape, handle);
       launch_bias_add(d_b, d_workspace_b, shape, stream);
       launch_activation(opt.activation, d_workspace_b, shape, stream);
@@ -223,7 +220,8 @@ int main(int argc, char **argv) {
     throw std::invalid_argument("Unknown --impl " + opt.impl);
   }
 
-  /* TODO(student): copy final activations back to h_output. */
+  // copy final activations back to h_output.
+  cudaMemcpy(d_workspace_a, h_output, h_output, cudaMemcpyHostToDevice);
 
   if (opt.verify) {
     mlp_cpu_reference(opt.layers, batch, h_weights, h_biases, weight_offsets,
