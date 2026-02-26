@@ -114,7 +114,7 @@ __global__ void fused_bias_activation_kernel(const float *__restrict__ bias,
     v = gelu(v);
   }
 
-  activations[idx] = activation_val;
+  activations[idx] = v;
 }
 
 inline void launch_fused_bias_activation(const float *bias,
