@@ -302,15 +302,9 @@ int main(int argc, char **argv) {
       LayerShape shape{batch, opt.layers[layer], opt.layers[layer + 1]};
       const float *d_w = d_weights + weight_offsets[layer];
       const float *d_b = d_biases + bias_offsets[layer];
-      check_cublas(
-          run_gemm_layer(d_workspace_a, d_w, d_workspace_b, shape, handle),
-          "run gemm layer");
+      run_gemm_layer(d_workspace_a, d_w, d_workspace_b, shape, handle);
       launch_bias_add(d_b, d_workspace_b, shape, stream);
-      check_cuda(cudaGetLastError(), "kernel launch bias");
-      check_cuda(cudaStreamSynchronize(stream), "kernel execution bias");
       launch_activation(opt.activation, d_workspace_b, shape, stream);
-      check_cuda(cudaGetLastError(), "kernel launch bias");
-      check_cuda(cudaStreamSynchronize(stream), "kernel execution bias");
       std::swap(d_workspace_a, d_workspace_b);
     }
     check_cuda(cudaEventRecord(stop, stream), "record baseline stop");
