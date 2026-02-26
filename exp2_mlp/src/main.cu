@@ -185,6 +185,23 @@ void mlp_cpu_reference(const std::vector<int> &layers, int batch,
   output = curr; // final activations
 }
 
+__inline__ float calculate_max_abs_diff(const std::vector<float> &a,
+                                        const std::vector<float> &b) {
+  if (a.size() != b.size()) {
+    throw std::invalid_argument(
+        "Solution and Reference vectors must have the same size.");
+  }
+
+  float max_diff = 0.0f;
+  for (int i = 0; i < solution.size(); i++) {
+    float diff = std::abs(a[i] - b[i]);
+    if (diff > max_diff)
+      max_diff = diff;
+  }
+
+  return max_diff;
+}
+
 int main(int argc, char **argv) {
   // Manage argument options
   Options opt = parse_args(argc, argv);
@@ -319,8 +336,8 @@ int main(int argc, char **argv) {
   if (opt.verify) {
     mlp_cpu_reference(opt.layers, batch, h_weights, h_biases, weight_offsets,
                       bias_offsets, h_input, h_ref, opt.activation);
-    /* TODO(student): compute max absolute difference between h_output and
-     * h_ref. */
+    float max_diff = calculate_max_abs_diff(h_output, h_ref);
+    std::cout << "Maximum Difference: " << max_diff << std::endl;
   }
 
   if (elapsed_ms > 0.0f) {
