@@ -89,8 +89,76 @@ void seed_tensor(std::vector<float> &data, float scale) {
   }
 }
 
-__inline__ void cpu_gemm_layer(std::vector<float> &input, float *weights,
-                               std::vector<float> &output, ) {}
+static inline float gelu_cpu(float x) {
+  // tanh approximation GELU
+  const float kAlpha = 0.797885f; // sqrt(2/pi)
+  const float kBeta = 0.044715f;
+  return 0.5f * x * (1.0f + std::tanh(kAlpha * (x + kBeta * x * x * x)));
+}
+
+// output = input * W^T
+// input:  [B, in] row-major
+// weight: [out, in] row-major (per assignment)
+// output: [B, out] row-major
+__inline__ void cpu_gemm_layer(const std::vector<float> &input,
+                               const std::vector<float> &weights,
+                               size_t w_offset, std::vector<float> &output,
+                               const LayerShape &shape) {
+  const int B = shape.batch;
+  const int in = shape.in_dim;
+  const int out = shape.out_dim;
+
+  // Ensure output size
+  output.assign(static_cast<size_t>(B) * out, 0.0f);
+
+  // For each (b, j): sum over k
+  for (int b = 0; b < B; ++b) {
+    const size_t x_row = static_cast<size_t>(b) * in;
+    const size_t y_row = static_cast<size_t>(b) * out;
+    for (int j = 0; j < out; ++j) {
+      const size_t w_row = w_offset + static_cast<size_t>(j) * in; // W[j, :]
+      float acc = 0.0f;
+      for (int k = 0; k < in; ++k) {
+        acc += input[x_row + k] * weights[w_row + k];
+      }
+      output[y_row + j] = acc;
+    }
+  }
+}
+
+__inline__ void bias_add(const std::vector<float> &biases, size_t b_offset,
+                         std::vector<float> &activations,
+                         const LayerShape &shape) {
+  const int B = shape.batch;
+  const int out = shape.out_dim;
+
+  for (int b = 0; b < B; ++b) {
+    const size_t row = static_cast<size_t>(b) * out;
+    for (int j = 0; j < out; ++j) {
+      activations[row + j] += biases[b_offset + static_cast<size_t>(j)];
+    }
+  }
+}
+
+__inline__ void activation(std::string_view act,
+                           std::vector<float> &activations,
+                           const LayerShape &shape) {
+  const size_t elements =
+      static_cast<size_t>(shape.batch) * static_cast<size_t>(shape.out_dim);
+
+  if (act == "relu") {
+    for (size_t i = 0; i < elements; ++i) {
+      if (activations[i] < 0.0f)
+        activations[i] = 0.0f;
+    }
+  } else if (act == "gelu") {
+    for (size_t i = 0; i < elements; ++i) {
+      activations[i] = gelu_cpu(activations[i]);
+    }
+  } else {
+    // If you add more activations, handle them here.
+  }
+}
 
 void mlp_cpu_reference(const std::vector<int> &layers, int batch,
                        const std::vector<float> &weights,
@@ -98,34 +166,23 @@ void mlp_cpu_reference(const std::vector<int> &layers, int batch,
                        const std::vector<size_t> &weight_offsets,
                        const std::vector<size_t> &bias_offsets,
                        const std::vector<float> &input,
-                       std::vector<float> &output,
-                       const std::string &activation) {
-  /* TODO(student): implement a simple CPU forward pass (GEMM + bias +
-     activation per layer). Remember that weights are stored row-major with
-     shape [out_dim, in_dim]. */
+                       std::vector<float> &output, const std::string &act) {
+  const int num_layers = static_cast<int>(layers.size()) - 1;
 
   std::vector<float> curr = input;
-  std::vector<float> next(batch * out_dim);
+  std::vector<float> next;
 
   for (int layer = 0; layer < num_layers; ++layer) {
     LayerShape shape{batch, layers[layer], layers[layer + 1]};
 
-    const float *d_w = weights + weight_offsets[layer];
-    const float *d_b = biases + bias_offsets[layer];
-    run_gemm_layer(curr, d_w, next, shape, handle);
-    launch_bias_add(d_b, d_workspace_b, shape, stream);
-    launch_activation(opt.activation, d_workspace_b, shape, stream);
-    std::swap(d_workspace_a, d_workspace_b);
+    cpu_gemm_layer(curr, weights, weight_offsets[layer], next, shape);
+    bias_add(biases, bias_offsets[layer], next, shape);
+    activation(act, next, shape);
+
+    curr.swap(next);
   }
-  (void)layers;
-  (void)batch;
-  (void)weights;
-  (void)biases;
-  (void)weight_offsets;
-  (void)bias_offsets;
-  (void)input;
-  (void)output;
-  (void)activation;
+
+  output = curr; // final activations
 }
 
 int main(int argc, char **argv) {
