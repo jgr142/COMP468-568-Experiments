@@ -117,9 +117,9 @@ inline void launch_fused_bias_activation(const float *bias,
   (void)elements;
 }
 
-inline void run_gemm_layer(const float *input, const float *weight,
-                           float *output, const LayerShape &shape,
-                           cublasHandle_t handle) {
+inline cublasStatus_t run_gemm_layer(const float *input, const float *weight,
+                                     float *output, const LayerShape &shape,
+                                     cublasHandle_t handle) {
   const int B = shape.batch;
   const int in = shape.in_dim;
   const int out = shape.out_dim;
@@ -131,7 +131,6 @@ inline void run_gemm_layer(const float *input, const float *weight,
   const int ldb = in;
   const int ldc = out;
 
-  cublasStatus_t st =
-      cublasSgemm(handle, CUBLAS_OP_T, CUBLAS_OP_N, out, B, in, &alpha, weight,
-                  lda, input, ldb, &beta, output, ldc);
+  return cublasSgemm(handle, CUBLAS_OP_T, CUBLAS_OP_N, out, B, in, &alpha,
+                     weight, lda, input, ldb, &beta, output, ldc);
 }
