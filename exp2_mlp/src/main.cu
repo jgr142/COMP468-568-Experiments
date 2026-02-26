@@ -321,8 +321,8 @@ int main(int argc, char **argv) {
     check_cuda(cudaEventRecord(start, stream), "record fused start");
     for (int layer = 0; layer < num_layers; ++layer) {
       LayerShape shape{batch, opt.layers[layer], opt.layers[layer + 1]};
-      const float *d_w = nullptr; // TODO(student)
-      const float *d_b = nullptr; // TODO(student)
+      const float *d_w = d_weights + weight_offsets[layer];
+      const float *d_b = d_biases + bias_offsets[layer];
       run_gemm_layer(d_workspace_a, d_w, d_workspace_b, shape, handle);
       launch_fused_bias_activation(d_b, opt.activation, d_workspace_b, shape,
                                    stream);

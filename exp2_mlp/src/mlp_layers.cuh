@@ -57,8 +57,8 @@ __global__ void relu_kernel(float *__restrict__ activations, size_t elements) {
     return;
 
   float activation = activations[idx];
-  if (activation < 0)
-    activations[idx] = 0;
+  if (activation < 0.0f)
+    activations[idx] = 0.0f;
 }
 
 __global__ void gelu_kernel(float *__restrict__ activations, size_t elements) {
@@ -86,8 +86,6 @@ inline void launch_activation(const std::string &activation, float *activations,
     relu_kernel<<<blocks, threads, 0, stream>>>(activations, elements);
   } else if (activation == "gelu") {
     gelu_kernel<<<blocks, threads, 0, stream>>>(activations, elements);
-  } else {
-    // TODO(student): add more activations as desired
   }
 }
 
@@ -95,12 +93,28 @@ __global__ void fused_bias_activation_kernel(const float *__restrict__ bias,
                                              float *__restrict__ activations,
                                              LayerShape shape,
                                              int activation_type) {
-  /* TODO(student): fuse bias add + activation.
-     activation_type: 0=ReLU, 1=GELU, extend as needed. */
-  (void)bias;
-  (void)activations;
-  (void)shape;
-  (void)activation_type;
+  int batch = shape.batch;
+  int out_dim = shape.out_dim;
+
+  int idx = blockIdx.x * blockDim.x + threadIdx.x;
+  int elements = batch * out_dim;
+
+  if (idx >= elements)
+    return;
+
+  int bias_idx = idx % out_dim;
+
+  float v = activations[idx];
+  v += bias[bias_idx];
+
+  if (activation_type == 0) { // relu
+    if (v < 0.0f)
+      v = 0.0f;
+  } else if (activation_type == 1) { // gelu
+    v = gelu(v);
+  }
+
+  activations[idx] = activation_val;
 }
 
 inline void launch_fused_bias_activation(const float *bias,
