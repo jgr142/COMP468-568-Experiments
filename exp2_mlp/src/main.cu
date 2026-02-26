@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <cublas_v2.h>
 #include <cuda_runtime.h>
 
@@ -193,7 +194,7 @@ __inline__ float calculate_max_abs_diff(const std::vector<float> &a,
   }
 
   float max_diff = 0.0f;
-  for (int i = 0; i < solution.size(); i++) {
+  for (size_t i = 0; i < a.size(); i++) {
     float diff = std::abs(a[i] - b[i]);
     if (diff > max_diff)
       max_diff = diff;
