@@ -1,4 +1,5 @@
 #include <cassert>
+#include <cstring>
 #include <cuda_runtime.h>
 #include <iostream>
 #include <vector>
@@ -70,6 +71,27 @@ int main(int argc, char **argv) {
   double density = 0.01;
   unsigned seed = 1234;
 
+  // Supported flags:
+  //   --M <int> --K <int> --N <int> --density <double> --seed <uint>
+  for (int i = 1; i < argc; i++) {
+    if (!std::strcmp(argv[i], "--M") && i + 1 < argc) {
+      M = std::atoi(argv[++i]);
+    } else if (!std::strcmp(argv[i], "--K") && i + 1 < argc) {
+      K = std::atoi(argv[++i]);
+    } else if (!std::strcmp(argv[i], "--N") && i + 1 < argc) {
+      N = std::atoi(argv[++i]);
+    } else if (!std::strcmp(argv[i], "--density") && i + 1 < argc) {
+      density = std::atof(argv[++i]);
+    } else if (!std::strcmp(argv[i], "--seed") && i + 1 < argc) {
+      seed = (unsigned)std::strtoul(argv[++i], nullptr, 10);
+    } else if (!std::strcmp(argv[i], "--help") || !std::strcmp(argv[i], "-h")) {
+      std::cout << "Usage: " << argv[0]
+                << " [--M int] [--K int] [--N int] [--density double] [--seed "
+                   "uint]\n";
+      return 0;
+    }
+  }
+
   std::vector<int> row_ptr, col_idx;
   std::vector<float> vals;
   generate_random_csr(M, K, density, row_ptr, col_idx, vals, seed);
@@ -106,8 +128,22 @@ int main(int argc, char **argv) {
   int block = 256;
   int grid = (M + block - 1) / block;
 
+  cudaEvent_t ev_start, ev_stop;
+  cudaEventCreate(&ev_start);
+  cudaEventCreate(&ev_stop);
+
+  cudaEventRecord(ev_start);
   spmm_csr_row_kernel<<<grid, block>>>(M, N, d_row_ptr, d_col_idx, d_vals, d_B,
                                        d_C);
+  cudaEventRecord(ev_stop);
+  cudaEventSynchronize(ev_stop);
+
+  float ms = 0.0f;
+  cudaEventElapsedTime(&ms, ev_start, ev_stop);
+
+  cudaEventDestroy(ev_start);
+  cudaEventDestroy(ev_stop);
+
   cudaDeviceSynchronize();
 
   // Copy back
@@ -118,6 +154,15 @@ int main(int argc, char **argv) {
   // Compare (will be wrong until students complete TODOs)
   float err = max_abs_err(C_ref, C);
   std::cout << "Max error = " << err << "\n";
+
+  // FLOPs for SpMM: for each nonzero, N multiply-adds => 2 * nnz * N FLOPs
+  double flops = 2.0 * (double)nnz * (double)N;
+  double gflops =
+      flops / ((double)ms * 1.0e6); // since GFLOP/s = FLOPs / (ms*1e6)
+  std::cout << "PERF"
+            << " M=" << M << " K=" << K << " N=" << N << " density=" << density
+            << " nnz=" << nnz << " time_ms=" << ms << " gflops=" << gflops
+            << "\n";
 
   cudaFree(d_row_ptr);
   cudaFree(d_col_idx);
