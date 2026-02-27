@@ -1,0 +1,13 @@
+========================================
+SpMM Benchmark Run - Fri Feb 27 08:50:53 AM CST 2026
+========================================
+
+----- Baseline -----
+nnz = 2612
+Max error = 4.76837e-07
+
+----- Optimized -----
+Optimized SpMM: M=512 K=512 N=64 nnz = 2612
+Launching Kernel with Grid=64, Block=256
+Max error = 7.15256e-07
+
