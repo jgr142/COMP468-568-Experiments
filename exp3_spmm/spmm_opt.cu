@@ -78,7 +78,7 @@ int main() {
   generate_random_csr(M, K, density, row_ptr, col_idx, vals, seed);
   int nnz = row_ptr.back();
   std::cout << "Optimized SpMM: M=" << M << " K=" << K << " N=" << N
-            << "nnz = " << nnz << "\n";
+            << " nnz = " << nnz << "\n";
 
   // Create B
   std::vector<float> B((size_t)K * N);
