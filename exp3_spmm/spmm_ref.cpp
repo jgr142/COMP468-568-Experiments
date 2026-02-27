@@ -1,4 +1,3 @@
-
 // spmm_ref.cpp
 #include <vector>
 #include <random>
