@@ -44,20 +44,15 @@ __global__ void spmm_csr_row_kernel(int M, int N,
 
   // Find nonzero range
   int start, end;
-  // TODO (student): load start, end
   start = d_row_ptr[row];
   end = d_row_ptr[row + 1];
 
   // Loop over nonzeros in this row
   for (int idx = start; idx < end; idx++) {
-    // TODO (student): retrieve column index k
     int k = d_col_idx[idx];
 
-    // TODO (student): retrieve value v
     float v = d_vals[idx];
 
-    // TODO (student): loop over all columns j of output (0..N-1)
-    //                 and accumulate:
     for (int n = 0; n < N; n++) {
       float v2 = d_B[k * N + n];
       output_row[n] += v2 * v;
