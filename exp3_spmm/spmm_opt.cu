@@ -67,9 +67,6 @@ __global__ void spmm_csr_warp_kernel(int M, int N,
 ===========================================================
 */
 int main() {
-  std::cout << "This file contains student TODOs. Compile with spmm_ref.cpp to "
-               "link reference functions if needed."
-            << std::endl;
   // After students complete the kernel, they can use the code below to test
   // it.
   int M = 512, K = 512, N = 64;
@@ -81,7 +78,7 @@ int main() {
   generate_random_csr(M, K, density, row_ptr, col_idx, vals, seed);
   int nnz = row_ptr.back();
   std::cout << "Optimized SpMM: M=" << M << " K=" << K << " N=" << N
-            << "nnz = " << nnz << "\n ";
+            << "nnz = " << nnz << "\n";
 
   // Create B
   std::vector<float> B((size_t)K * N);
@@ -124,7 +121,7 @@ int main() {
              cudaMemcpyDeviceToHost);
   // Compare (will be wrong until students complete TODOs)
   float err = max_abs_err(C_ref, C);
-  std::cout << "Max error = " << err << "\\n";
+  std::cout << "Max error = " << err << "\n";
 
   cudaFree(d_row_ptr);
   cudaFree(d_col_idx);

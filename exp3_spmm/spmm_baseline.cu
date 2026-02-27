@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
   std::vector<float> vals;
   generate_random_csr(M, K, density, row_ptr, col_idx, vals, seed);
   int nnz = row_ptr.back();
-  std::cout << "nnz = " << nnz << "\\n";
+  std::cout << "nnz = " << nnz << "\n";
 
   // Create B
   std::vector<float> B((size_t)K * N);
@@ -117,7 +117,7 @@ int main(int argc, char **argv) {
 
   // Compare (will be wrong until students complete TODOs)
   float err = max_abs_err(C_ref, C);
-  std::cout << "Max error = " << err << "\\n";
+  std::cout << "Max error = " << err << "\n";
 
   cudaFree(d_row_ptr);
   cudaFree(d_col_idx);
