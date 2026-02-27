@@ -1,13 +1,779 @@
 ========================================
-SpMM Benchmark Run - Fri Feb 27 08:50:53 AM CST 2026
+SpMM Benchmark Sweep - Fri Feb 27 03:52:46 PM CST 2026
 ========================================
 
------ Baseline -----
+Sweeping sizes...
+
+Running M=256 K=256 N=32 density=0.01 seed=1234
+----- baseline M=256 K=256 N=32 density=0.01 seed=1234 -----
+nnz = 698
+Max error = 2.38419e-07
+PERF M=256 K=256 N=32 density=0.01 nnz=698 time_ms=0.17408 gflops=0.256618
+
+----- optimized M=256 K=256 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=256 N=32 nnz = 698
+Launching Kernel with Grid=32, Block=256
+Max error = 2.38419e-07
+PERF M=256 K=256 N=32 density=0.01 nnz=698 time_ms=0.096256 gflops=0.464096
+
+Running M=256 K=256 N=64 density=0.01 seed=1234
+----- baseline M=256 K=256 N=64 density=0.01 seed=1234 -----
+nnz = 698
+Max error = 3.57628e-07
+PERF M=256 K=256 N=64 density=0.01 nnz=698 time_ms=0.254976 gflops=0.350402
+
+----- optimized M=256 K=256 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=256 N=64 nnz = 698
+Launching Kernel with Grid=32, Block=256
+Max error = 2.38419e-07
+PERF M=256 K=256 N=64 density=0.01 nnz=698 time_ms=0.098304 gflops=0.908854
+
+Running M=256 K=256 N=128 density=0.01 seed=1234
+----- baseline M=256 K=256 N=128 density=0.01 seed=1234 -----
+nnz = 698
+Max error = 3.57628e-07
+PERF M=256 K=256 N=128 density=0.01 nnz=698 time_ms=0.422176 gflops=0.423255
+
+----- optimized M=256 K=256 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=256 N=128 nnz = 698
+Launching Kernel with Grid=32, Block=256
+Max error = 3.57628e-07
+PERF M=256 K=256 N=128 density=0.01 nnz=698 time_ms=0.101888 gflops=1.75377
+
+Running M=256 K=256 N=256 density=0.01 seed=1234
+----- baseline M=256 K=256 N=256 density=0.01 seed=1234 -----
+nnz = 698
+Max error = 2.38419e-07
+PERF M=256 K=256 N=256 density=0.01 nnz=698 time_ms=0.745088 gflops=0.479643
+
+----- optimized M=256 K=256 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=256 N=256 nnz = 698
+Launching Kernel with Grid=32, Block=256
+Max error = 4.76837e-07
+PERF M=256 K=256 N=256 density=0.01 nnz=698 time_ms=0.105792 gflops=3.3781
+
+Running M=256 K=512 N=32 density=0.01 seed=1234
+----- baseline M=256 K=512 N=32 density=0.01 seed=1234 -----
+nnz = 1344
+Max error = 4.76837e-07
+PERF M=256 K=512 N=32 density=0.01 nnz=1344 time_ms=0.231424 gflops=0.371681
+
+----- optimized M=256 K=512 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=512 N=32 nnz = 1344
+Launching Kernel with Grid=32, Block=256
+Max error = 3.57628e-07
+PERF M=256 K=512 N=32 density=0.01 nnz=1344 time_ms=0.09728 gflops=0.88421
+
+Running M=256 K=512 N=64 density=0.01 seed=1234
+----- baseline M=256 K=512 N=64 density=0.01 seed=1234 -----
+nnz = 1344
+Max error = 5.96046e-07
+PERF M=256 K=512 N=64 density=0.01 nnz=1344 time_ms=0.373792 gflops=0.460235
+
+----- optimized M=256 K=512 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=512 N=64 nnz = 1344
+Launching Kernel with Grid=32, Block=256
+Max error = 4.76837e-07
+PERF M=256 K=512 N=64 density=0.01 nnz=1344 time_ms=0.10208 gflops=1.68527
+
+Running M=256 K=512 N=128 density=0.01 seed=1234
+----- baseline M=256 K=512 N=128 density=0.01 seed=1234 -----
+nnz = 1344
+Max error = 4.76837e-07
+PERF M=256 K=512 N=128 density=0.01 nnz=1344 time_ms=0.648032 gflops=0.530937
+
+----- optimized M=256 K=512 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=512 N=128 nnz = 1344
+Launching Kernel with Grid=32, Block=256
+Max error = 4.76837e-07
+PERF M=256 K=512 N=128 density=0.01 nnz=1344 time_ms=0.104448 gflops=3.29412
+
+Running M=256 K=512 N=256 density=0.01 seed=1234
+----- baseline M=256 K=512 N=256 density=0.01 seed=1234 -----
+nnz = 1344
+Max error = 4.76837e-07
+PERF M=256 K=512 N=256 density=0.01 nnz=1344 time_ms=1.18038 gflops=0.58297
+
+----- optimized M=256 K=512 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=512 N=256 nnz = 1344
+Launching Kernel with Grid=32, Block=256
+Max error = 4.76837e-07
+PERF M=256 K=512 N=256 density=0.01 nnz=1344 time_ms=0.090816 gflops=7.57717
+
+Running M=256 K=1024 N=32 density=0.01 seed=1234
+----- baseline M=256 K=1024 N=32 density=0.01 seed=1234 -----
+nnz = 2606
+Max error = 7.15256e-07
+PERF M=256 K=1024 N=32 density=0.01 nnz=2606 time_ms=0.345984 gflops=0.482057
+
+----- optimized M=256 K=1024 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=1024 N=32 nnz = 2606
+Launching Kernel with Grid=32, Block=256
+Max error = 7.15256e-07
+PERF M=256 K=1024 N=32 density=0.01 nnz=2606 time_ms=0.098112 gflops=1.69993
+
+Running M=256 K=1024 N=64 density=0.01 seed=1234
+----- baseline M=256 K=1024 N=64 density=0.01 seed=1234 -----
+nnz = 2606
+Max error = 4.76837e-07
+PERF M=256 K=1024 N=64 density=0.01 nnz=2606 time_ms=0.593824 gflops=0.561729
+
+----- optimized M=256 K=1024 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=1024 N=64 nnz = 2606
+Launching Kernel with Grid=32, Block=256
+Max error = 7.15256e-07
+PERF M=256 K=1024 N=64 density=0.01 nnz=2606 time_ms=0.0976 gflops=3.4177
+
+Running M=256 K=1024 N=128 density=0.01 seed=1234
+----- baseline M=256 K=1024 N=128 density=0.01 seed=1234 -----
+nnz = 2606
+Max error = 9.53674e-07
+PERF M=256 K=1024 N=128 density=0.01 nnz=2606 time_ms=1.10189 gflops=0.605448
+
+----- optimized M=256 K=1024 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=1024 N=128 nnz = 2606
+Launching Kernel with Grid=32, Block=256
+Max error = 7.15256e-07
+PERF M=256 K=1024 N=128 density=0.01 nnz=2606 time_ms=0.08704 gflops=7.66471
+
+Running M=256 K=1024 N=256 density=0.01 seed=1234
+----- baseline M=256 K=1024 N=256 density=0.01 seed=1234 -----
+nnz = 2606
+Max error = 7.15256e-07
+PERF M=256 K=1024 N=256 density=0.01 nnz=2606 time_ms=2.14432 gflops=0.622235
+
+----- optimized M=256 K=1024 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=1024 N=256 nnz = 2606
+Launching Kernel with Grid=32, Block=256
+Max error = 7.15256e-07
+PERF M=256 K=1024 N=256 density=0.01 nnz=2606 time_ms=0.102368 gflops=13.0341
+
+Running M=256 K=2048 N=32 density=0.01 seed=1234
+----- baseline M=256 K=2048 N=32 density=0.01 seed=1234 -----
+nnz = 5230
+Max error = 9.53674e-07
+PERF M=256 K=2048 N=32 density=0.01 nnz=5230 time_ms=0.58768 gflops=0.569562
+
+----- optimized M=256 K=2048 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=2048 N=32 nnz = 5230
+Launching Kernel with Grid=32, Block=256
+Max error = 9.53674e-07
+PERF M=256 K=2048 N=32 density=0.01 nnz=5230 time_ms=0.10608 gflops=3.15535
+
+Running M=256 K=2048 N=64 density=0.01 seed=1234
+----- baseline M=256 K=2048 N=64 density=0.01 seed=1234 -----
+nnz = 5230
+Max error = 9.53674e-07
+PERF M=256 K=2048 N=64 density=0.01 nnz=5230 time_ms=1.0777 gflops=0.621177
+
+----- optimized M=256 K=2048 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=2048 N=64 nnz = 5230
+Launching Kernel with Grid=32, Block=256
+Max error = 1.43051e-06
+PERF M=256 K=2048 N=64 density=0.01 nnz=5230 time_ms=0.089024 gflops=7.51977
+
+Running M=256 K=2048 N=128 density=0.01 seed=1234
+----- baseline M=256 K=2048 N=128 density=0.01 seed=1234 -----
+nnz = 5230
+Max error = 9.53674e-07
+PERF M=256 K=2048 N=128 density=0.01 nnz=5230 time_ms=2.07917 gflops=0.64395
+
+----- optimized M=256 K=2048 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=2048 N=128 nnz = 5230
+Launching Kernel with Grid=32, Block=256
+Max error = 1.19209e-06
+PERF M=256 K=2048 N=128 density=0.01 nnz=5230 time_ms=0.08928 gflops=14.9964
+
+Running M=256 K=2048 N=256 density=0.01 seed=1234
+----- baseline M=256 K=2048 N=256 density=0.01 seed=1234 -----
+nnz = 5230
+Max error = 9.53674e-07
+PERF M=256 K=2048 N=256 density=0.01 nnz=5230 time_ms=4.12518 gflops=0.649125
+
+----- optimized M=256 K=2048 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=256 K=2048 N=256 nnz = 5230
+Launching Kernel with Grid=32, Block=256
+Max error = 1.43051e-06
+PERF M=256 K=2048 N=256 density=0.01 nnz=5230 time_ms=0.113728 gflops=23.5453
+
+Running M=512 K=256 N=32 density=0.01 seed=1234
+----- baseline M=512 K=256 N=32 density=0.01 seed=1234 -----
+nnz = 1388
+Max error = 3.57628e-07
+PERF M=512 K=256 N=32 density=0.01 nnz=1388 time_ms=0.173056 gflops=0.513314
+
+----- optimized M=512 K=256 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=256 N=32 nnz = 1388
+Launching Kernel with Grid=64, Block=256
+Max error = 2.38419e-07
+PERF M=512 K=256 N=32 density=0.01 nnz=1388 time_ms=0.104448 gflops=0.85049
+
+Running M=512 K=256 N=64 density=0.01 seed=1234
+----- baseline M=512 K=256 N=64 density=0.01 seed=1234 -----
+nnz = 1388
+Max error = 2.38419e-07
+PERF M=512 K=256 N=64 density=0.01 nnz=1388 time_ms=0.264192 gflops=0.672481
+
+----- optimized M=512 K=256 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=256 N=64 nnz = 1388
+Launching Kernel with Grid=64, Block=256
+Max error = 2.38419e-07
+PERF M=512 K=256 N=64 density=0.01 nnz=1388 time_ms=0.099328 gflops=1.78866
+
+Running M=512 K=256 N=128 density=0.01 seed=1234
+----- baseline M=512 K=256 N=128 density=0.01 seed=1234 -----
+nnz = 1388
+Max error = 2.38419e-07
+PERF M=512 K=256 N=128 density=0.01 nnz=1388 time_ms=0.431648 gflops=0.823189
+
+----- optimized M=512 K=256 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=256 N=128 nnz = 1388
+Launching Kernel with Grid=64, Block=256
+Max error = 2.38419e-07
+PERF M=512 K=256 N=128 density=0.01 nnz=1388 time_ms=0.1048 gflops=3.39053
+
+Running M=512 K=256 N=256 density=0.01 seed=1234
+----- baseline M=512 K=256 N=256 density=0.01 seed=1234 -----
+nnz = 1388
+Max error = 2.38419e-07
+PERF M=512 K=256 N=256 density=0.01 nnz=1388 time_ms=0.754976 gflops=0.941296
+
+----- optimized M=512 K=256 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=256 N=256 nnz = 1388
+Launching Kernel with Grid=64, Block=256
+Max error = 3.57628e-07
+PERF M=512 K=256 N=256 density=0.01 nnz=1388 time_ms=0.120416 gflops=5.90167
+
+Running M=512 K=512 N=32 density=0.01 seed=1234
+----- baseline M=512 K=512 N=32 density=0.01 seed=1234 -----
 nnz = 2612
 Max error = 4.76837e-07
+PERF M=512 K=512 N=32 density=0.01 nnz=2612 time_ms=0.226272 gflops=0.738792
 
------ Optimized -----
+----- optimized M=512 K=512 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=512 N=32 nnz = 2612
+Launching Kernel with Grid=64, Block=256
+Max error = 4.76837e-07
+PERF M=512 K=512 N=32 density=0.01 nnz=2612 time_ms=0.103456 gflops=1.61584
+
+Running M=512 K=512 N=64 density=0.01 seed=1234
+----- baseline M=512 K=512 N=64 density=0.01 seed=1234 -----
+nnz = 2612
+Max error = 4.76837e-07
+PERF M=512 K=512 N=64 density=0.01 nnz=2612 time_ms=0.36736 gflops=0.910105
+
+----- optimized M=512 K=512 N=64 density=0.01 seed=1234 -----
 Optimized SpMM: M=512 K=512 N=64 nnz = 2612
 Launching Kernel with Grid=64, Block=256
-Max error = 7.15256e-07
+Max error = 4.76837e-07
+PERF M=512 K=512 N=64 density=0.01 nnz=2612 time_ms=0.096192 gflops=3.47572
 
+Running M=512 K=512 N=128 density=0.01 seed=1234
+----- baseline M=512 K=512 N=128 density=0.01 seed=1234 -----
+nnz = 2612
+Max error = 4.76837e-07
+PERF M=512 K=512 N=128 density=0.01 nnz=2612 time_ms=0.643104 gflops=1.03976
+
+----- optimized M=512 K=512 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=512 N=128 nnz = 2612
+Launching Kernel with Grid=64, Block=256
+Max error = 7.15256e-07
+PERF M=512 K=512 N=128 density=0.01 nnz=2612 time_ms=0.1064 gflops=6.28451
+
+Running M=512 K=512 N=256 density=0.01 seed=1234
+----- baseline M=512 K=512 N=256 density=0.01 seed=1234 -----
+nnz = 2612
+Max error = 5.96046e-07
+PERF M=512 K=512 N=256 density=0.01 nnz=2612 time_ms=1.18013 gflops=1.13322
+
+----- optimized M=512 K=512 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=512 N=256 nnz = 2612
+Launching Kernel with Grid=64, Block=256
+Max error = 4.76837e-07
+PERF M=512 K=512 N=256 density=0.01 nnz=2612 time_ms=0.094176 gflops=14.2005
+
+Running M=512 K=1024 N=32 density=0.01 seed=1234
+----- baseline M=512 K=1024 N=32 density=0.01 seed=1234 -----
+nnz = 5230
+Max error = 7.15256e-07
+PERF M=512 K=1024 N=32 density=0.01 nnz=5230 time_ms=0.348416 gflops=0.960691
+
+----- optimized M=512 K=1024 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=1024 N=32 nnz = 5230
+Launching Kernel with Grid=64, Block=256
+Max error = 7.15256e-07
+PERF M=512 K=1024 N=32 density=0.01 nnz=5230 time_ms=0.099168 gflops=3.37528
+
+Running M=512 K=1024 N=64 density=0.01 seed=1234
+----- baseline M=512 K=1024 N=64 density=0.01 seed=1234 -----
+nnz = 5230
+Max error = 7.15256e-07
+PERF M=512 K=1024 N=64 density=0.01 nnz=5230 time_ms=0.601536 gflops=1.11288
+
+----- optimized M=512 K=1024 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=1024 N=64 nnz = 5230
+Launching Kernel with Grid=64, Block=256
+Max error = 5.96046e-07
+PERF M=512 K=1024 N=64 density=0.01 nnz=5230 time_ms=0.107104 gflops=6.25037
+
+Running M=512 K=1024 N=128 density=0.01 seed=1234
+----- baseline M=512 K=1024 N=128 density=0.01 seed=1234 -----
+nnz = 5230
+Max error = 9.53674e-07
+PERF M=512 K=1024 N=128 density=0.01 nnz=5230 time_ms=1.12314 gflops=1.19209
+
+----- optimized M=512 K=1024 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=1024 N=128 nnz = 5230
+Launching Kernel with Grid=64, Block=256
+Max error = 7.15256e-07
+PERF M=512 K=1024 N=128 density=0.01 nnz=5230 time_ms=0.088608 gflops=15.1101
+
+Running M=512 K=1024 N=256 density=0.01 seed=1234
+----- baseline M=512 K=1024 N=256 density=0.01 seed=1234 -----
+nnz = 5230
+Max error = 7.15256e-07
+PERF M=512 K=1024 N=256 density=0.01 nnz=5230 time_ms=2.14288 gflops=1.24961
+
+----- optimized M=512 K=1024 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=1024 N=256 nnz = 5230
+Launching Kernel with Grid=64, Block=256
+Max error = 7.15256e-07
+PERF M=512 K=1024 N=256 density=0.01 nnz=5230 time_ms=0.090784 gflops=29.4959
+
+Running M=512 K=2048 N=32 density=0.01 seed=1234
+----- baseline M=512 K=2048 N=32 density=0.01 seed=1234 -----
+nnz = 10586
+Max error = 8.34465e-07
+PERF M=512 K=2048 N=32 density=0.01 nnz=10586 time_ms=0.59968 gflops=1.12978
+
+----- optimized M=512 K=2048 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=2048 N=32 nnz = 10586
+Launching Kernel with Grid=64, Block=256
+Max error = 9.53674e-07
+PERF M=512 K=2048 N=32 density=0.01 nnz=10586 time_ms=0.108288 gflops=6.2565
+
+Running M=512 K=2048 N=64 density=0.01 seed=1234
+----- baseline M=512 K=2048 N=64 density=0.01 seed=1234 -----
+nnz = 10586
+Max error = 9.53674e-07
+PERF M=512 K=2048 N=64 density=0.01 nnz=10586 time_ms=1.09914 gflops=1.23279
+
+----- optimized M=512 K=2048 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=2048 N=64 nnz = 10586
+Launching Kernel with Grid=64, Block=256
+Max error = 9.53674e-07
+PERF M=512 K=2048 N=64 density=0.01 nnz=10586 time_ms=0.09008 gflops=15.0423
+
+Running M=512 K=2048 N=128 density=0.01 seed=1234
+----- baseline M=512 K=2048 N=128 density=0.01 seed=1234 -----
+nnz = 10586
+Max error = 1.19209e-06
+PERF M=512 K=2048 N=128 density=0.01 nnz=10586 time_ms=2.12986 gflops=1.27239
+
+----- optimized M=512 K=2048 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=2048 N=128 nnz = 10586
+Launching Kernel with Grid=64, Block=256
+Max error = 9.53674e-07
+PERF M=512 K=2048 N=128 density=0.01 nnz=10586 time_ms=0.089984 gflops=30.1166
+
+Running M=512 K=2048 N=256 density=0.01 seed=1234
+----- baseline M=512 K=2048 N=256 density=0.01 seed=1234 -----
+nnz = 10586
+Max error = 1.43051e-06
+PERF M=512 K=2048 N=256 density=0.01 nnz=10586 time_ms=4.21437 gflops=1.28608
+
+----- optimized M=512 K=2048 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=512 K=2048 N=256 nnz = 10586
+Launching Kernel with Grid=64, Block=256
+Max error = 9.53674e-07
+PERF M=512 K=2048 N=256 density=0.01 nnz=10586 time_ms=0.122848 gflops=44.1198
+
+Running M=1024 K=256 N=32 density=0.01 seed=1234
+----- baseline M=1024 K=256 N=32 density=0.01 seed=1234 -----
+nnz = 2692
+Max error = 2.38419e-07
+PERF M=1024 K=256 N=32 density=0.01 nnz=2692 time_ms=0.180256 gflops=0.955796
+
+----- optimized M=1024 K=256 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=256 N=32 nnz = 2692
+Launching Kernel with Grid=128, Block=256
+Max error = 2.38419e-07
+PERF M=1024 K=256 N=32 density=0.01 nnz=2692 time_ms=0.09728 gflops=1.77105
+
+Running M=1024 K=256 N=64 density=0.01 seed=1234
+----- baseline M=1024 K=256 N=64 density=0.01 seed=1234 -----
+nnz = 2692
+Max error = 3.57628e-07
+PERF M=1024 K=256 N=64 density=0.01 nnz=2692 time_ms=0.265216 gflops=1.29923
+
+----- optimized M=1024 K=256 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=256 N=64 nnz = 2692
+Launching Kernel with Grid=128, Block=256
+Max error = 4.76837e-07
+PERF M=1024 K=256 N=64 density=0.01 nnz=2692 time_ms=0.100352 gflops=3.43367
+
+Running M=1024 K=256 N=128 density=0.01 seed=1234
+----- baseline M=1024 K=256 N=128 density=0.01 seed=1234 -----
+nnz = 2692
+Max error = 3.57628e-07
+PERF M=1024 K=256 N=128 density=0.01 nnz=2692 time_ms=0.433696 gflops=1.58902
+
+----- optimized M=1024 K=256 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=256 N=128 nnz = 2692
+Launching Kernel with Grid=128, Block=256
+Max error = 4.76837e-07
+PERF M=1024 K=256 N=128 density=0.01 nnz=2692 time_ms=0.111008 gflops=6.20813
+
+Running M=1024 K=256 N=256 density=0.01 seed=1234
+----- baseline M=1024 K=256 N=256 density=0.01 seed=1234 -----
+nnz = 2692
+Max error = 3.57628e-07
+PERF M=1024 K=256 N=256 density=0.01 nnz=2692 time_ms=0.759552 gflops=1.81463
+
+----- optimized M=1024 K=256 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=256 N=256 nnz = 2692
+Launching Kernel with Grid=128, Block=256
+Max error = 3.57628e-07
+PERF M=1024 K=256 N=256 density=0.01 nnz=2692 time_ms=0.109024 gflops=12.6422
+
+Running M=1024 K=512 N=32 density=0.01 seed=1234
+----- baseline M=1024 K=512 N=32 density=0.01 seed=1234 -----
+nnz = 5239
+Max error = 4.76837e-07
+PERF M=1024 K=512 N=32 density=0.01 nnz=5239 time_ms=0.231424 gflops=1.44884
+
+----- optimized M=1024 K=512 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=512 N=32 nnz = 5239
+Launching Kernel with Grid=128, Block=256
+Max error = 4.76837e-07
+PERF M=1024 K=512 N=32 density=0.01 nnz=5239 time_ms=0.098304 gflops=3.41081
+
+Running M=1024 K=512 N=64 density=0.01 seed=1234
+----- baseline M=1024 K=512 N=64 density=0.01 seed=1234 -----
+nnz = 5239
+Max error = 4.76837e-07
+PERF M=1024 K=512 N=64 density=0.01 nnz=5239 time_ms=0.369856 gflops=1.81312
+
+----- optimized M=1024 K=512 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=512 N=64 nnz = 5239
+Launching Kernel with Grid=128, Block=256
+Max error = 7.15256e-07
+PERF M=1024 K=512 N=64 density=0.01 nnz=5239 time_ms=0.100928 gflops=6.64426
+
+Running M=1024 K=512 N=128 density=0.01 seed=1234
+----- baseline M=1024 K=512 N=128 density=0.01 seed=1234 -----
+nnz = 5239
+Max error = 4.76837e-07
+PERF M=1024 K=512 N=128 density=0.01 nnz=5239 time_ms=0.654112 gflops=2.05039
+
+----- optimized M=1024 K=512 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=512 N=128 nnz = 5239
+Launching Kernel with Grid=128, Block=256
+Max error = 4.76837e-07
+PERF M=1024 K=512 N=128 density=0.01 nnz=5239 time_ms=0.110752 gflops=12.1098
+
+Running M=1024 K=512 N=256 density=0.01 seed=1234
+----- baseline M=1024 K=512 N=256 density=0.01 seed=1234 -----
+nnz = 5239
+Max error = 4.76837e-07
+PERF M=1024 K=512 N=256 density=0.01 nnz=5239 time_ms=1.18205 gflops=2.26925
+
+----- optimized M=1024 K=512 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=512 N=256 nnz = 5239
+Launching Kernel with Grid=128, Block=256
+Max error = 4.76837e-07
+PERF M=1024 K=512 N=256 density=0.01 nnz=5239 time_ms=0.09376 gflops=28.6089
+
+Running M=1024 K=1024 N=32 density=0.01 seed=1234
+----- baseline M=1024 K=1024 N=32 density=0.01 seed=1234 -----
+nnz = 10586
+Max error = 5.96046e-07
+PERF M=1024 K=1024 N=32 density=0.01 nnz=10586 time_ms=0.362592 gflops=1.8685
+
+----- optimized M=1024 K=1024 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=1024 N=32 nnz = 10586
+Launching Kernel with Grid=128, Block=256
+Max error = 7.15256e-07
+PERF M=1024 K=1024 N=32 density=0.01 nnz=10586 time_ms=0.100608 gflops=6.7341
+
+Running M=1024 K=1024 N=64 density=0.01 seed=1234
+----- baseline M=1024 K=1024 N=64 density=0.01 seed=1234 -----
+nnz = 10586
+Max error = 9.53674e-07
+PERF M=1024 K=1024 N=64 density=0.01 nnz=10586 time_ms=0.615008 gflops=2.20324
+
+----- optimized M=1024 K=1024 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=1024 N=64 nnz = 10586
+Launching Kernel with Grid=128, Block=256
+Max error = 9.53674e-07
+PERF M=1024 K=1024 N=64 density=0.01 nnz=10586 time_ms=0.10112 gflops=13.4
+
+Running M=1024 K=1024 N=128 density=0.01 seed=1234
+----- baseline M=1024 K=1024 N=128 density=0.01 seed=1234 -----
+nnz = 10586
+Max error = 7.15256e-07
+PERF M=1024 K=1024 N=128 density=0.01 nnz=10586 time_ms=1.1448 gflops=2.36724
+
+----- optimized M=1024 K=1024 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=1024 N=128 nnz = 10586
+Launching Kernel with Grid=128, Block=256
+Max error = 7.15256e-07
+PERF M=1024 K=1024 N=128 density=0.01 nnz=10586 time_ms=0.098048 gflops=27.6397
+
+Running M=1024 K=1024 N=256 density=0.01 seed=1234
+----- baseline M=1024 K=1024 N=256 density=0.01 seed=1234 -----
+nnz = 10586
+Max error = 7.15256e-07
+PERF M=1024 K=1024 N=256 density=0.01 nnz=10586 time_ms=2.19709 gflops=2.46692
+
+----- optimized M=1024 K=1024 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=1024 N=256 nnz = 10586
+Launching Kernel with Grid=128, Block=256
+Max error = 9.53674e-07
+PERF M=1024 K=1024 N=256 density=0.01 nnz=10586 time_ms=0.097696 gflops=55.4785
+
+Running M=1024 K=2048 N=32 density=0.01 seed=1234
+----- baseline M=1024 K=2048 N=32 density=0.01 seed=1234 -----
+nnz = 21112
+Max error = 1.19209e-06
+PERF M=1024 K=2048 N=32 density=0.01 nnz=21112 time_ms=0.613088 gflops=2.20387
+
+----- optimized M=1024 K=2048 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=2048 N=32 nnz = 21112
+Launching Kernel with Grid=128, Block=256
+Max error = 9.53674e-07
+PERF M=1024 K=2048 N=32 density=0.01 nnz=21112 time_ms=0.10464 gflops=12.9125
+
+Running M=1024 K=2048 N=64 density=0.01 seed=1234
+----- baseline M=1024 K=2048 N=64 density=0.01 seed=1234 -----
+nnz = 21112
+Max error = 1.43051e-06
+PERF M=1024 K=2048 N=64 density=0.01 nnz=21112 time_ms=1.10077 gflops=2.45496
+
+----- optimized M=1024 K=2048 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=2048 N=64 nnz = 21112
+Launching Kernel with Grid=128, Block=256
+Max error = 1.43051e-06
+PERF M=1024 K=2048 N=64 density=0.01 nnz=21112 time_ms=0.090784 gflops=29.7667
+
+Running M=1024 K=2048 N=128 density=0.01 seed=1234
+----- baseline M=1024 K=2048 N=128 density=0.01 seed=1234 -----
+nnz = 21112
+Max error = 9.53674e-07
+PERF M=1024 K=2048 N=128 density=0.01 nnz=21112 time_ms=2.13027 gflops=2.53708
+
+----- optimized M=1024 K=2048 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=2048 N=128 nnz = 21112
+Launching Kernel with Grid=128, Block=256
+Max error = 1.43051e-06
+PERF M=1024 K=2048 N=128 density=0.01 nnz=21112 time_ms=0.084416 gflops=64.0243
+
+Running M=1024 K=2048 N=256 density=0.01 seed=1234
+----- baseline M=1024 K=2048 N=256 density=0.01 seed=1234 -----
+nnz = 21112
+Max error = 9.53674e-07
+PERF M=1024 K=2048 N=256 density=0.01 nnz=21112 time_ms=4.23338 gflops=2.55336
+
+----- optimized M=1024 K=2048 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=1024 K=2048 N=256 nnz = 21112
+Launching Kernel with Grid=128, Block=256
+Max error = 1.43051e-06
+PERF M=1024 K=2048 N=256 density=0.01 nnz=21112 time_ms=0.120032 gflops=90.0539
+
+Running M=2048 K=256 N=32 density=0.01 seed=1234
+----- baseline M=2048 K=256 N=32 density=0.01 seed=1234 -----
+nnz = 5394
+Max error = 3.57628e-07
+PERF M=2048 K=256 N=32 density=0.01 nnz=5394 time_ms=0.173056 gflops=1.99482
+
+----- optimized M=2048 K=256 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=256 N=32 nnz = 5394
+Launching Kernel with Grid=256, Block=256
+Max error = 4.76837e-07
+PERF M=2048 K=256 N=32 density=0.01 nnz=5394 time_ms=0.096256 gflops=3.58644
+
+Running M=2048 K=256 N=64 density=0.01 seed=1234
+----- baseline M=2048 K=256 N=64 density=0.01 seed=1234 -----
+nnz = 5394
+Max error = 4.76837e-07
+PERF M=2048 K=256 N=64 density=0.01 nnz=5394 time_ms=0.257024 gflops=2.68626
+
+----- optimized M=2048 K=256 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=256 N=64 nnz = 5394
+Launching Kernel with Grid=256, Block=256
+Max error = 3.57628e-07
+PERF M=2048 K=256 N=64 density=0.01 nnz=5394 time_ms=0.099328 gflops=6.95103
+
+Running M=2048 K=256 N=128 density=0.01 seed=1234
+----- baseline M=2048 K=256 N=128 density=0.01 seed=1234 -----
+nnz = 5394
+Max error = 4.76837e-07
+PERF M=2048 K=256 N=128 density=0.01 nnz=5394 time_ms=0.430944 gflops=3.20428
+
+----- optimized M=2048 K=256 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=256 N=128 nnz = 5394
+Launching Kernel with Grid=256, Block=256
+Max error = 4.76837e-07
+PERF M=2048 K=256 N=128 density=0.01 nnz=5394 time_ms=0.10448 gflops=13.2165
+
+Running M=2048 K=256 N=256 density=0.01 seed=1234
+----- baseline M=2048 K=256 N=256 density=0.01 seed=1234 -----
+nnz = 5394
+Max error = 4.76837e-07
+PERF M=2048 K=256 N=256 density=0.01 nnz=5394 time_ms=0.75792 gflops=3.64383
+
+----- optimized M=2048 K=256 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=256 N=256 nnz = 5394
+Launching Kernel with Grid=256, Block=256
+Max error = 4.76837e-07
+PERF M=2048 K=256 N=256 density=0.01 nnz=5394 time_ms=0.129728 gflops=21.2886
+
+Running M=2048 K=512 N=32 density=0.01 seed=1234
+----- baseline M=2048 K=512 N=32 density=0.01 seed=1234 -----
+nnz = 10599
+Max error = 4.76837e-07
+PERF M=2048 K=512 N=32 density=0.01 nnz=10599 time_ms=0.245792 gflops=2.7598
+
+----- optimized M=2048 K=512 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=512 N=32 nnz = 10599
+Launching Kernel with Grid=256, Block=256
+Max error = 4.76837e-07
+PERF M=2048 K=512 N=32 density=0.01 nnz=10599 time_ms=0.099328 gflops=6.82925
+
+Running M=2048 K=512 N=64 density=0.01 seed=1234
+----- baseline M=2048 K=512 N=64 density=0.01 seed=1234 -----
+nnz = 10599
+Max error = 4.76837e-07
+PERF M=2048 K=512 N=64 density=0.01 nnz=10599 time_ms=0.382304 gflops=3.54867
+
+----- optimized M=2048 K=512 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=512 N=64 nnz = 10599
+Launching Kernel with Grid=256, Block=256
+Max error = 4.76837e-07
+PERF M=2048 K=512 N=64 density=0.01 nnz=10599 time_ms=0.10976 gflops=12.3603
+
+Running M=2048 K=512 N=128 density=0.01 seed=1234
+----- baseline M=2048 K=512 N=128 density=0.01 seed=1234 -----
+nnz = 10599
+Max error = 7.15256e-07
+PERF M=2048 K=512 N=128 density=0.01 nnz=10599 time_ms=0.680544 gflops=3.98702
+
+----- optimized M=2048 K=512 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=512 N=128 nnz = 10599
+Launching Kernel with Grid=256, Block=256
+Max error = 7.15256e-07
+PERF M=2048 K=512 N=128 density=0.01 nnz=10599 time_ms=0.104256 gflops=26.0258
+
+Running M=2048 K=512 N=256 density=0.01 seed=1234
+----- baseline M=2048 K=512 N=256 density=0.01 seed=1234 -----
+nnz = 10599
+Max error = 7.15256e-07
+PERF M=2048 K=512 N=256 density=0.01 nnz=10599 time_ms=1.23395 gflops=4.39781
+
+----- optimized M=2048 K=512 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=512 N=256 nnz = 10599
+Launching Kernel with Grid=256, Block=256
+Max error = 7.15256e-07
+PERF M=2048 K=512 N=256 density=0.01 nnz=10599 time_ms=0.107872 gflops=50.3067
+
+Running M=2048 K=1024 N=32 density=0.01 seed=1234
+----- baseline M=2048 K=1024 N=32 density=0.01 seed=1234 -----
+nnz = 21112
+Max error = 7.15256e-07
+PERF M=2048 K=1024 N=32 density=0.01 nnz=21112 time_ms=0.361088 gflops=3.74194
+
+----- optimized M=2048 K=1024 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=1024 N=32 nnz = 21112
+Launching Kernel with Grid=256, Block=256
+Max error = 7.15256e-07
+PERF M=2048 K=1024 N=32 density=0.01 nnz=21112 time_ms=0.102208 gflops=13.2198
+
+Running M=2048 K=1024 N=64 density=0.01 seed=1234
+----- baseline M=2048 K=1024 N=64 density=0.01 seed=1234 -----
+nnz = 21112
+Max error = 7.15256e-07
+PERF M=2048 K=1024 N=64 density=0.01 nnz=21112 time_ms=0.621088 gflops=4.35097
+
+----- optimized M=2048 K=1024 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=1024 N=64 nnz = 21112
+Launching Kernel with Grid=256, Block=256
+Max error = 9.53674e-07
+PERF M=2048 K=1024 N=64 density=0.01 nnz=21112 time_ms=0.103904 gflops=26.008
+
+Running M=2048 K=1024 N=128 density=0.01 seed=1234
+----- baseline M=2048 K=1024 N=128 density=0.01 seed=1234 -----
+nnz = 21112
+Max error = 8.34465e-07
+PERF M=2048 K=1024 N=128 density=0.01 nnz=21112 time_ms=1.16074 gflops=4.65625
+
+----- optimized M=2048 K=1024 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=1024 N=128 nnz = 21112
+Launching Kernel with Grid=256, Block=256
+Max error = 7.15256e-07
+PERF M=2048 K=1024 N=128 density=0.01 nnz=21112 time_ms=0.096096 gflops=56.2424
+
+Running M=2048 K=1024 N=256 density=0.01 seed=1234
+----- baseline M=2048 K=1024 N=256 density=0.01 seed=1234 -----
+nnz = 21112
+Max error = 9.53674e-07
+PERF M=2048 K=1024 N=256 density=0.01 nnz=21112 time_ms=2.21133 gflops=4.88817
+
+----- optimized M=2048 K=1024 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=1024 N=256 nnz = 21112
+Launching Kernel with Grid=256, Block=256
+Max error = 9.53674e-07
+PERF M=2048 K=1024 N=256 density=0.01 nnz=21112 time_ms=0.09216 gflops=117.289
+
+Running M=2048 K=2048 N=32 density=0.01 seed=1234
+----- baseline M=2048 K=2048 N=32 density=0.01 seed=1234 -----
+nnz = 42105
+Max error = 9.53674e-07
+PERF M=2048 K=2048 N=32 density=0.01 nnz=42105 time_ms=0.605152 gflops=4.45296
+
+----- optimized M=2048 K=2048 N=32 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=2048 N=32 nnz = 42105
+Launching Kernel with Grid=256, Block=256
+Max error = 9.53674e-07
+PERF M=2048 K=2048 N=32 density=0.01 nnz=42105 time_ms=0.104256 gflops=25.8471
+
+Running M=2048 K=2048 N=64 density=0.01 seed=1234
+----- baseline M=2048 K=2048 N=64 density=0.01 seed=1234 -----
+nnz = 42105
+Max error = 1.43051e-06
+PERF M=2048 K=2048 N=64 density=0.01 nnz=42105 time_ms=1.12272 gflops=4.80034
+
+----- optimized M=2048 K=2048 N=64 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=2048 N=64 nnz = 42105
+Launching Kernel with Grid=256, Block=256
+Max error = 1.43051e-06
+PERF M=2048 K=2048 N=64 density=0.01 nnz=42105 time_ms=0.09216 gflops=58.4792
+
+Running M=2048 K=2048 N=128 density=0.01 seed=1234
+----- baseline M=2048 K=2048 N=128 density=0.01 seed=1234 -----
+nnz = 42105
+Max error = 1.43051e-06
+PERF M=2048 K=2048 N=128 density=0.01 nnz=42105 time_ms=2.17136 gflops=4.96411
+
+----- optimized M=2048 K=2048 N=128 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=2048 N=128 nnz = 42105
+Launching Kernel with Grid=256, Block=256
+Max error = 1.43051e-06
+PERF M=2048 K=2048 N=128 density=0.01 nnz=42105 time_ms=0.09216 gflops=116.958
+
+Running M=2048 K=2048 N=256 density=0.01 seed=1234
+----- baseline M=2048 K=2048 N=256 density=0.01 seed=1234 -----
+nnz = 42105
+Max error = 1.43051e-06
+PERF M=2048 K=2048 N=256 density=0.01 nnz=42105 time_ms=4.24403 gflops=5.07955
+
+----- optimized M=2048 K=2048 N=256 density=0.01 seed=1234 -----
+Optimized SpMM: M=2048 K=2048 N=256 nnz = 42105
+Launching Kernel with Grid=256, Block=256
+Max error = 1.90735e-06
+PERF M=2048 K=2048 N=256 density=0.01 nnz=42105 time_ms=0.135392 gflops=159.225
+
+========================================
+Sweep complete - Fri Feb 27 03:53:23 PM CST 2026
+Text log: spmm_results.txt
+CSV: spmm_results.csv
+========================================
