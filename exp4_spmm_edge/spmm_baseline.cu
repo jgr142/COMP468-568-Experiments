@@ -36,9 +36,26 @@ __global__ void spmm_csr_row_kernel(int M, int N,
     return;
 
   // TODO student: init output row
+  float_t *out_row = &d_C[row * N];
+
   // TODO student: load start, end
+  int start = d_row_ptr[row];
+  int end = d_row_ptr[row + 1];
+
   // TODO student: loop over p in row nnz
   // TODO student: accumulate into d_C[row*N + j]
+
+  for (int col_m = 0; col_m < N; col_m++) {
+    float_t sum = 0;
+    for (int i = start; i < end; i++) {
+      int col_sp = d_col_idx[i];
+      int row_m = col_sp;
+
+      sum += d_B[row_m * N + col_m] * d_vals[i];
+    }
+
+    out_row[col_m] = sum;
+  }
 }
 
 int main(int argc, char **argv) {
