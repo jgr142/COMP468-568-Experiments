@@ -37,10 +37,28 @@ __global__ void spmm_csr_warp_kernel(int M, int N,
     return;
   int row = warp;
 
+  float_t *output_row = d_C + row * N;
+  for (int j = lane; j < N; j += 32) {
+    output_row[j] = 0.0f;
+  }
+
   // TODO student: fetch start, end
+  int start = d_row_ptr[row];
+  int end = d_row_ptr[row + 1];
+
   // TODO student: for j = lane; j < N; j += 32 ...
-  // TODO student: loop over nonzeros
-  // TODO student: accumulate
+  for (int j = lane; j < N; j += 32) {
+    // TODO student: loop over nonzeros
+    // TODO student: accumulate
+    for (int idx = start; idx < end; idx++) {
+      int k = d_col_idx[idx];
+
+      float v = d_vals[idx];
+      float v2 = d_B[k * N + j];
+
+      output_row[j] += v2 * v;
+    }
+  }
 }
 
 int main() {
